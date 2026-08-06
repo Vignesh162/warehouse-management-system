@@ -1,4 +1,4 @@
-import { addProduct, getAllProducts, getProductById, updateProduct, deleteProductById } from "../controllers/product.js";
+import { addProduct, getAllProducts, getProductById, updateProduct, issueOrReceiveProduct, deleteProductById } from "../controllers/product.js";
 
 export default function productRoutes(fastify, options, done) {
 
@@ -25,6 +25,12 @@ export default function productRoutes(fastify, options, done) {
         preValidation: [fastify.authenticate],
         handler: updateProduct
     });
+
+    // issue / recive product route
+    fastify.patch("/:id/stock",{
+        preValidation: [fastify.authenticate],
+        handler: issueOrReceiveProduct
+    })
 
     // delete item
     fastify.delete("/:id", {

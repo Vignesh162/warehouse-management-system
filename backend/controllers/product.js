@@ -133,7 +133,6 @@ export async function addProduct(req, reply) {
 export async function updateProduct(req, reply) {
 
     try {
-
         const id = req.params.id;
 
         const {
@@ -200,6 +199,74 @@ export async function updateProduct(req, reply) {
 
         console.error(err);
 
+        return reply.code(500).send({
+            message: err.message
+        });
+    }
+}
+
+// issue or receive product 
+export async function issueOrReceiveProduct(req, reply) {
+    const id = req.params.id;
+    const { quantity, remarks } = req.body;
+
+    const products = req.server.mongo.db.collection("products");
+    const transactions = req.server.mongo.db.collection("transactions");
+
+    try {
+        const product = await products.findOne({
+            _id: new ObjectId(id)
+        });
+
+        if (!product) {
+            return reply.code(404).send({
+                message: "Product not found"
+            });
+        }
+
+        const type = quantity >= 0 ? "RECEIVE" : "ISSUE";
+
+        // Prevent negative stock
+        if (type === "ISSUE" && product.quantity < Math.abs(quantity)) {
+            return reply.code(400).send({
+                message: "Insufficient stock"
+            });
+        }
+
+        await products.updateOne(
+            {
+                _id: product._id
+            },
+            {
+                $inc: {
+                    quantity: quantity
+                },
+                $set: {
+                    updatedAt: new Date()
+                }
+            }
+        );
+
+        await transactions.insertOne({
+            productId: product._id,
+            type,
+            quantity: Math.abs(quantity),
+            remarks,
+            performedBy: new ObjectId(req.user.id),
+            transactionDate: new Date()
+        });
+
+        const updatedProduct = await products.findOne({
+            _id: product._id
+        });
+
+        return reply.code(200).send({
+            message: `${type} successful`,
+            product: updatedProduct
+        });
+
+    } catch (err) {
+        console.error(err);
         return reply.code(500).send({
             message: err.message
         });
