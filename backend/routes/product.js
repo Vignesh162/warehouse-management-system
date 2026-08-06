@@ -1,4 +1,4 @@
-import { addProduct, getAllProducts, getProductByid, updateProduct, deleteProductById } from "../controllers/product.js";
+import { addProduct, getAllProducts, getProductById, updateProduct, deleteProductById } from "../controllers/product.js";
 
 export default function productRoutes(fastify, options, done) {
 
@@ -11,7 +11,7 @@ export default function productRoutes(fastify, options, done) {
     // Get item by id
     fastify.get("/:id", {
         preValidation: [fastify.authenticate],
-        handler: getProductByid
+        handler: getProductById
     });
 
     // Add item
@@ -21,7 +21,7 @@ export default function productRoutes(fastify, options, done) {
     });
 
     // update item
-    fastify.put("/", {
+    fastify.put("/:id", {
         preValidation: [fastify.authenticate],
         handler: updateProduct
     });
