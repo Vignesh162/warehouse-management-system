@@ -1,3 +1,5 @@
+import { Product } from "./product.js";
+
 export const GetAllProductsSchema = {
     querystring: {
         type: "object",
@@ -28,9 +30,7 @@ export const GetAllProductsSchema = {
                 },
                 products: {
                     type: "array",
-                    items: {
-                        type: "object"
-                    }
+                    items: Product
                 }
             }
         }
