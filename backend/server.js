@@ -24,7 +24,7 @@ await fastify.register(fastifyCors, {
     // Configuration options go here
     origin: '*',
     //   origin: 'https://yourfrontend.com',
-    //   methods: ['GET', 'POST', 'PUT', 'DELETE']
+    methods: ['GET', 'POST', 'PUT', 'DELETE',"PATCH","OPTIONS"]
 });
 
 
@@ -32,8 +32,8 @@ await fastify.register(fastifyCors, {
 await fastify.register(swagger, {
     openapi: {
         info: {
-            title: 'My Fastify API',
-            description: 'Automatically generated OpenAPI documentation',
+            title: 'Warehouse Stock Tracker API',
+            description: 'REST API for Warehouse Inventory Management built with Fastify and MongoDB. Automatically generated OpenAPI documentation',
             version: '1.0.0'
         },
         servers: [{
