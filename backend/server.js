@@ -16,7 +16,7 @@ import transactionRoutes from "./routes/transactions.js";
  * @type {import('fastify').FastifyInstance} Instance of Fastify
  */
 const fastify = Fastify({
-  logger: true
+    logger: true
 })
 
 // Register the plugin with your configuration
@@ -36,7 +36,10 @@ await fastify.register(swagger, {
             description: 'Automatically generated OpenAPI documentation',
             version: '1.0.0'
         },
-        servers: [{ url: `http://localhost:${process.env.PORT}` }]
+        servers: [{
+            url: process.env.RENDER_EXTERNAL_URL ||
+                `http://localhost:${process.env.PORT || 3000}`
+        }]
     }
 });
 
@@ -53,21 +56,24 @@ await fastify.register(swaggerUi, {
 await fastify.register(mongodbPluggin);
 
 // register jwt pluggin
-await fastify.register(jwtPlugin);  
+await fastify.register(jwtPlugin);
 
 // register user routes
-fastify.register(userRoutes,{prefix:"/api/users"});
+fastify.register(userRoutes, { prefix: "/api/users" });
 
 // register product routes
-fastify.register(productRoutes,{prefix:"/api/products"});
+fastify.register(productRoutes, { prefix: "/api/products" });
 
 // register transaction routes
-fastify.register(transactionRoutes,{prefix:"/api/transactions"})
+fastify.register(transactionRoutes, { prefix: "/api/transactions" })
 
-fastify.listen({ port: process.env.PORT || 3000 }, function (err, address) {
-  if (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-  // Server is now listening on ${address}
+fastify.listen({
+    port: process.env.PORT || 3000,
+    host: "0.0.0.0"
+}, function (err, address) {
+    if (err) {
+        fastify.log.error(err)
+        process.exit(1)
+    }
+    // Server is now listening on ${address}
 })
