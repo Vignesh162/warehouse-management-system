@@ -22,7 +22,7 @@ export const StockSchema = {
         properties: {
             quantity: {
                 type: "number",
-                minimum: 1
+                not: { const: 0 }
             },
             remarks: {
                 type: "string"
