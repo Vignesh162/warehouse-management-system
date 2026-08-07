@@ -1,4 +1,4 @@
-import { GetTransactionsSchema } from "../schemas/transaction.js";
+import { GetTransactionsSchema } from "../schemas/getTransactions.js";
 import { getAllTransactions } from "../controllers/transactions.js";
 
 export default function transactionRoutes(fastify,options,done){

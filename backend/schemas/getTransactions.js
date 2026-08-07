@@ -28,6 +28,12 @@ export const GetTransactionsSchema = {
                 type: "string",
                 minLength: 24,
                 maxLength: 24
+            },
+            productSKU: {
+                type: "string"
+            },
+            productName: {
+                type: "string"
             }
         }
     },
