@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-
+import { serializeProduct } from "../helper/serializeProduct.js";
 // Get All Products
 export async function getAllProducts(req, reply) {
     try {
@@ -15,12 +15,12 @@ export async function getAllProducts(req, reply) {
             .toArray();
 
         const total = await collection.countDocuments();
-
+        console.log(products);
         return reply.code(200).send({
             total,
             page,
             limit,
-            products
+            products: products.map(serializeProduct)
         });
 
     } catch (err) {
@@ -38,7 +38,7 @@ export async function getProductById(req, reply) {
     try {
 
         const id = req.params.id;
-
+        
         const product = await req.server.mongo.db
             .collection("products")
             .findOne({
@@ -50,8 +50,9 @@ export async function getProductById(req, reply) {
                 message: "Product not found"
             });
         }
-
-        return reply.code(200).send(product);
+        console.log(product);
+        console.log(serializeProduct(product));
+        return reply.code(200).send(serializeProduct(product));
 
     } catch (err) {
 
@@ -108,7 +109,7 @@ export async function addProduct(req, reply) {
             message: "Product added successfully",
             product: {
                 _id: result.insertedId,
-                ...newProduct
+                ...serializeProduct(newProduct)
             }
         });
 
@@ -192,7 +193,7 @@ export async function updateProduct(req, reply) {
 
         return reply.code(200).send({
             message: "Product updated successfully",
-            product: updatedProduct
+            product: serializeProduct(updatedProduct)
         });
 
     } catch (err) {
@@ -262,7 +263,7 @@ export async function issueOrReceiveProduct(req, reply) {
 
         return reply.code(200).send({
             message: `${type} successful`,
-            product: updatedProduct
+            product: serializeProduct(updatedProduct)  
         });
 
     } catch (err) {

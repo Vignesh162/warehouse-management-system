@@ -7,6 +7,7 @@ import mongodbPluggin from "./plugins/mongodb.js"
 import productRoutes from './routes/product.js'
 import jwtPlugin from "./plugins/jwt.js";
 import userRoutes from './routes/users.js';
+import transactionRoutes from "./routes/transactions.js";
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
@@ -23,10 +24,13 @@ await fastify.register(mongodbPluggin);
 await fastify.register(jwtPlugin);  
 
 // register user routes
-fastify.register(userRoutes,{prefix:"/users"});
+fastify.register(userRoutes,{prefix:"/api/users"});
 
 // register product routes
-fastify.register(productRoutes,{prefix:"/products"});
+fastify.register(productRoutes,{prefix:"/api/products"});
+
+// register transaction routes
+fastify.register(transactionRoutes,{prefix:"/api/transactions"})
 
 fastify.listen({ port: process.env.PORT || 3000 }, function (err, address) {
   if (err) {

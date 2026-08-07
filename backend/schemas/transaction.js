@@ -1,31 +1,80 @@
-export const TransactionSchema = {
-    type: "object",
-    properties: {
-        _id: {
-            type: "string"
-        },
-        productId: {
-            type: "string"
-        },
-        type: {
-            type: "string",
-            enum: [
-                "RECEIVE",
-                "ISSUE"
-            ]
-        },
-        quantity: {
-            type: "number"
-        },
-        remarks: {
-            type: "string"
-        },
-        performedBy: {
-            type: "string"
-        },
-        transactionDate: {
-            type: "string",
-            format: "date-time"
+export const GetTransactionsSchema = {
+    querystring: {
+        type: "object",
+        properties: {
+            page: {
+                type: "number",
+                minimum: 1,
+                default: 1
+            },
+            limit: {
+                type: "number",
+                minimum: 1,
+                maximum: 100,
+                default: 10
+            },
+            type: {
+                type: "string",
+                enum: ["RECEIVE", "ISSUE"]
+            },
+            productId: {
+                type: "string",
+                minLength: 24,
+                maxLength: 24
+            },
+            performedBy: {
+                type: "string",
+                minLength: 24,
+                maxLength: 24
+            }
+        }
+    },
+
+    response: {
+        200: {
+            type: "object",
+            properties: {
+                total: {
+                    type: "number"
+                },
+                page: {
+                    type: "number"
+                },
+                limit: {
+                    type: "number"
+                },
+                transactions: {
+                    type: "array",
+                    items: {
+                        type: "object",
+                        properties: {
+                            _id: {
+                                type: "string"
+                            },
+                            productId: {
+                                type: "string"
+                            },
+                            type: {
+                                type: "string",
+                                enum: ["RECEIVE", "ISSUE"]
+                            },
+                            quantity: {
+                                type: "number"
+                            },
+                            remarks: {
+                                type: "string"
+                            },
+                            performedBy: {
+                                type: "string"
+                            },
+                            transactionDate: {
+                                type: "string",
+                                format: "date-time"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 };
