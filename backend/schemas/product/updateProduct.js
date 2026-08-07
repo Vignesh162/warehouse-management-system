@@ -1,3 +1,5 @@
+import { Product } from "./product.js";
+
 export const UpdateProductSchema = {
     params: {
         type: "object",
@@ -21,25 +23,15 @@ export const UpdateProductSchema = {
             "rackLocation"
         ],
         properties: {
-            name: {
-                type: "string"
-            },
-            sku: {
-                type: "string"
-            },
-            category: {
-                type: "string"
-            },
+            name: { type: "string" },
+            sku: { type: "string" },
+            category: { type: "string" },
             quantity: {
                 type: "number",
                 minimum: 0
             },
-            rackLocation: {
-                type: "string"
-            },
-            description: {
-                type: "string"
-            }
+            rackLocation: { type: "string" },
+            description: { type: "string" }
         }
     },
 
@@ -50,9 +42,7 @@ export const UpdateProductSchema = {
                 message: {
                     type: "string"
                 },
-                product: {
-                    type: "object"
-                }
+                product: Product
             }
         }
     }

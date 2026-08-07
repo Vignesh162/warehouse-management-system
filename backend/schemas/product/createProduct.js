@@ -1,3 +1,5 @@
+import { Product } from "./product.js";
+
 export const CreateProductSchema = {
     body: {
         type: "object",
@@ -40,9 +42,7 @@ export const CreateProductSchema = {
                 message: {
                     type: "string"
                 },
-                product: {
-                    type: "object"
-                }
+                product: Product
             }
         }
     }

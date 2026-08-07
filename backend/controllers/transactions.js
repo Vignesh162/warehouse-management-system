@@ -1,19 +1,32 @@
-import { ObjectId } from "mongodb";
+import serializeTransaction from "../helper/serializeTransaction.js";
 
-export async function getAllTransactions(req,reply){
-    try{
+export async function getAllTransactions(req, reply) {
+    try {
         const limit = Number(req.query.limit) || 10;
         const page = Number(req.query.page) || 1;
 
-        const response = await req.server.mongo.db
-        .collection("transactions")
-        .find({})
-        .skip((page-1)* limit)
-        .limit(limit)
-        .toArray();
+        const collection = req.server.mongo.db.collection("transactions");
 
-        reply.code(200).send({response});
-    }catch(err){
-        reply.code(500).send({err});
+        const transactions = await collection
+            .find({})
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .toArray();
+
+        const total = await collection.countDocuments();
+
+        return reply.code(200).send({
+            total,
+            page,
+            limit,
+            transactions: transactions.map(serializeTransaction)
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        return reply.code(500).send({
+            message: err.message
+        });
     }
 }

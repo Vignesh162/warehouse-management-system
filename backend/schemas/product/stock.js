@@ -1,3 +1,5 @@
+import { Product } from "./product.js";
+
 export const StockSchema = {
     params: {
         type: "object",
@@ -35,9 +37,7 @@ export const StockSchema = {
                 message: {
                     type: "string"
                 },
-                product: {
-                    type: "object"
-                }
+                product: Product
             }
         }
     }
