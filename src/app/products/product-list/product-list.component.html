@@ -1,0 +1,79 @@
+<div class="flex items-center justify-between">
+
+    <h1 class="text-3xl font-bold">
+        Products
+    </h1>
+
+    <input type="text" [(ngModel)]="searchText" placeholder="Search Product...."
+        class="w-72 rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" name="search">
+
+    <a routerLink="/products/add" class="rounded bg-blue-700 px-4 py-3 text-white">
+
+        Add Product
+
+    </a>
+
+</div>
+
+<div class="mt-6 overflow-x-auto rounded-lg bg-white shadow">
+
+    <table class="w-full">
+
+        <thead class="bg-slate-200">
+
+            <tr>
+
+                <th class="p-4 text-left">Name</th>
+                <th class="p-4 text-left">SKU</th>
+                <th class="p-4 text-left">Category</th>
+                <th class="p-4 text-left">Quantity</th>
+                <th class="p-4 text-left">Rack</th>
+                <th class="p-4 text-left">Description</th>
+                <th class="p-4 text-left">Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @for (product of filteredProducts; track product._id) {
+
+            <tr class="border-b">
+
+                <td class="p-4">{{ product.name }}</td>
+
+                <td class="p-4">{{ product.sku }}</td>
+
+                <td class="p-4">{{ product.category }}</td>
+
+                <td class="p-4">{{ product.quantity }}</td>
+
+                <td class="p-4">{{ product.rackLocation }}</td>
+
+                <td class="p-4">{{ product.description }}</td>
+
+                <td class="space-x-2 p-4">
+
+                    <a [routerLink]="['/products/edit', product._id]" class="rounded bg-green-600 px-3 py-2 text-white">
+
+                        Edit
+
+                    </a>
+
+                    <button (click)="deleteProduct(product._id)" class="rounded bg-red-500 px-3 py-2 text-white">
+
+                        Delete
+
+                    </button>
+                </td>
+
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

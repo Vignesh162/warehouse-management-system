@@ -1,0 +1,61 @@
+<h1 class="mb-6 text-3xl font-bold">
+    Transaction History
+</h1>
+
+<div class="overflow-x-auto rounded-lg bg-white shadow">
+
+    <table class="w-full">
+
+        <thead class="bg-slate-200">
+
+            <tr>
+                <!-- <th class="p-4 text-left">ID</th> -->
+                <th class="p-4 text-left">Type</th>
+                <th class="p-4 text-left">Product</th>
+                <th class="p-4 text-left">Quantity</th>
+                <th class="p-4 text-left">Date</th>
+                <th class="p-4 text-left">Remark</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @for (transaction of transactions; track transaction._id) {
+
+                <tr class="border-b">
+<!-- 
+                    <td class="p-4">
+                        {{ transaction._id }}
+                    </td> -->
+
+                    <td class="p-4">
+                        {{ transaction.type }}
+                    </td>
+
+                    <td class="p-4">
+                        {{ transaction.productName }}
+                    </td>
+
+
+                    <td class="p-4">
+                        {{ transaction.quantity }}
+                    </td>
+
+                    <td class="p-4">
+                        {{ transaction.transactionDate }}
+                    </td>
+
+                    <td class="p-4">
+                        {{ transaction.remarks }}
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
