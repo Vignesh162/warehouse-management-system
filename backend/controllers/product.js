@@ -250,6 +250,8 @@ export async function issueOrReceiveProduct(req, reply) {
 
         await transactions.insertOne({
             productId: product._id,
+            productName: product.name,
+            productSKU:product.sku,
             type,
             quantity: Math.abs(quantity),
             remarks,

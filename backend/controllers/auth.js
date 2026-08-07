@@ -24,6 +24,8 @@ export const login = async (req, reply) => {
         const token = req.server.jwt.sign({
             id: user._id,
             username: user.username
+        },{
+            expiresIn:"24h"
         });
 
         return reply.send({ token, message:"Logged In Sucessfully"});
@@ -62,6 +64,8 @@ export const createUser = async (req, reply) => {
         const token = req.server.jwt.sign({
             id: result.insertedId,
             username
+        },{
+            expiresIn:"24h"
         });
 
         return reply.code(201).send({
