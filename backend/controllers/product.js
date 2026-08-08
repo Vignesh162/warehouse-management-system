@@ -209,7 +209,7 @@ export async function updateProduct(req, reply) {
 // issue or receive product 
 export async function issueOrReceiveProduct(req, reply) {
     const id = req.params.id;
-    const { quantity, remarks } = req.body;
+    let { quantity, remarks, transactionType } = req.body;
     const username = req.user.username;
     const products = req.server.mongo.db.collection("products");
     const transactions = req.server.mongo.db.collection("transactions");
@@ -225,10 +225,11 @@ export async function issueOrReceiveProduct(req, reply) {
             });
         }
 
-        const type = quantity >= 0 ? "RECEIVE" : "ISSUE";
+        // update quantity based on transaction type 
+        quantity = transactionType ==="ISSUE"?-quantity:quantity;
 
         // Prevent negative stock
-        if (type === "ISSUE" && product.quantity < Math.abs(quantity)) {
+        if (transactionType === "ISSUE" && product.quantity < Math.abs(quantity)) {
             return reply.code(400).send({
                 message: "Insufficient stock"
             });
@@ -252,7 +253,7 @@ export async function issueOrReceiveProduct(req, reply) {
             productId: product._id,
             productName: product.name,
             productSKU:product.sku,
-            type,
+            type: transactionType,
             quantity: Math.abs(quantity),
             remarks,
             performedBy: new ObjectId(req.user.id),
@@ -265,7 +266,7 @@ export async function issueOrReceiveProduct(req, reply) {
         });
 
         return reply.code(200).send({
-            message: `${type} successful`,
+            message: `${transactionType} successful`,
             product: serializeProduct(updatedProduct)  
         });
 

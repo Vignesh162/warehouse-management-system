@@ -12,20 +12,26 @@ export const StockSchema = {
             }
         }
     },
-
     body: {
         type: "object",
         required: [
             "quantity",
-            "remarks"
+            "remarks",
+            "transactionType"
         ],
         properties: {
             quantity: {
                 type: "number",
-                not: { const: 0 }
+                // not: { const: 0 }
+                minimum: 0
             },
             remarks: {
-                type: "string"
+                type: "string",
+                maxLength:200
+            },
+            transactionType: {
+                type: "string",
+                enum: ["RECEIVE", "ISSUE"]
             }
         }
     },
