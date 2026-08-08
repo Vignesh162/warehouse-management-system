@@ -210,7 +210,7 @@ export async function updateProduct(req, reply) {
 export async function issueOrReceiveProduct(req, reply) {
     const id = req.params.id;
     const { quantity, remarks } = req.body;
-
+    const username = req.user.username;
     const products = req.server.mongo.db.collection("products");
     const transactions = req.server.mongo.db.collection("transactions");
 
@@ -256,6 +256,7 @@ export async function issueOrReceiveProduct(req, reply) {
             quantity: Math.abs(quantity),
             remarks,
             performedBy: new ObjectId(req.user.id),
+            performedByName: username,
             transactionDate: new Date()
         });
 
