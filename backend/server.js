@@ -11,6 +11,7 @@ import productRoutes from './routes/product.js'
 import jwtPlugin from "./plugins/jwt.js";
 import userRoutes from './routes/users.js';
 import transactionRoutes from "./routes/transactions.js";
+import dashboardRoutes from "./routes/dashboard.js";
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
@@ -66,6 +67,9 @@ fastify.register(productRoutes, { prefix: "/api/products" });
 
 // register transaction routes
 fastify.register(transactionRoutes, { prefix: "/api/transactions" })
+
+// register dashboard route
+fastify.register(dashboardRoutes,{prefix: "/api/dashboard"})
 
 fastify.listen({
     port: process.env.PORT || 3000,
