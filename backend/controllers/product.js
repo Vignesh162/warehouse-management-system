@@ -228,9 +228,9 @@ export async function issueOrReceiveProduct(req, reply) {
         // update quantity based on transaction type 
         quantity = transactionType ==="ISSUE"?-quantity:quantity;
 
-        // Prevent negative stock
+        // Check if there is Sufficient Stock & Prevent negative stock
         if (transactionType === "ISSUE" && product.quantity < Math.abs(quantity)) {
-            return reply.code(400).send({
+            return reply.code(409).send({
                 message: "Insufficient stock"
             });
         }
