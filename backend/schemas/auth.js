@@ -20,7 +20,8 @@ export const RegisterSchema = {
             password: {
                 type: "string",
                 minLength: 6,
-                maxLength: 100
+                maxLength: 12,
+                pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$'
             }
         }
     },
@@ -75,7 +76,8 @@ export const LoginSchema = {
                 type: "string"
             },
             password: {
-                type: "string"
+                type: "string",
+                maxLength: 12,
             }
         }
     },
