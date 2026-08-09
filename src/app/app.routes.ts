@@ -4,7 +4,6 @@ import { LayoutComponent } from './layout/layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductFormComponent } from './products/product-form/product-form.component';
-import { IssueComponent } from './issue/issue.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ReciveComponent } from './recive/recive.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -46,12 +45,8 @@ export const routes: Routes = [
             },
 
             {
-                path: 'receive',
+                path: 'receive/:id',
                 component: ReciveComponent
-            },
-            {
-                path: 'issue',
-                component: IssueComponent
             },
 
             {

@@ -3,30 +3,37 @@
         <h1 class="mb-6 text-center text-3xl font-bold">Warehouse Login</h1>
 
         <div class="mb-4">
-            <label class="mb-2 block">Email</label>
-            <input
-                type="text"
-                name="username"
-                [(ngModel)]="loginData.username"
-                class="w-full rounded border p-3">
-            </div>
-            <div class="mb-4">
-                <label class="mb-2 block">
-                    Password
-                </label>
-                <input
-                name="password"
-                [(ngModel)]="loginData.password"
-                type="password"
-                class="w-full rounded border p-3">
+            <label class="mb-2 block">Username</label>
+            <input type="text" #username="ngModel" required name="username" placeholder="Enter User Name" [(ngModel)]="loginData.username" class="w-full rounded border p-3">
+            @if(username.touched){
+            @if (username.errors?.['required']) {
+            <p class="mt-1 text-sm text-red-500">
+                User Name is required.
+            </p>
+            }
+            }
         </div>
-        <button
-        (click)="postLogin()"
-        class="mb-4 w-full rounded bg-blue-700 p-3 text-white">Login</button>
-<p class="text-center text-sm">Don't have an account?
-    <a
-                routerLink="/register"
-                class="font-semibold text-blue-700">
+        <div class="mb-4">
+            <label class="mb-2 block">
+                Password
+            </label>
+            <input name="password" [(ngModel)]="loginData.password" type="password" required minlength="6"
+                maxlength="12" pattern="^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,12}$" #password="ngModel"
+                class="w-full rounded border p-3" placeholder="Enter password">
+
+            @if (password.invalid && password.touched) {
+
+            @if (password.errors?.['required']) {
+            <p class="mt-1 text-sm text-red-500">
+                Password is required.
+            </p>
+            }
+            }
+
+        </div>
+        <button (click)="postLogin()" class="mb-4 w-full rounded bg-blue-700 p-3 text-white">Login</button>
+        <p class="text-center text-sm">Don't have an account?
+            <a routerLink="/register" class="font-semibold text-blue-700">
                 Register
             </a>
         </p>

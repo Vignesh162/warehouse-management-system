@@ -1,79 +1,183 @@
-<div class="flex items-center justify-between">
+<div class="min-h-screen bg-gray-100 p-6">
 
-    <h1 class="text-3xl font-bold">
+  <!-- Page Header -->
+  <div class="mb-6 flex items-center justify-between">
+
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900">
         Products
-    </h1>
+      </h1>
 
-    <input type="text" [(ngModel)]="searchText" placeholder="Search Product...."
-        class="w-72 rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none" name="search">
+      <p class="mt-1 text-sm text-gray-500">
+        Manage all warehouse products.
+      </p>
+    </div>
 
-    <a routerLink="/products/add" class="rounded bg-blue-700 px-4 py-3 text-white">
-
-        Add Product
-
+    <!-- Add Product -->
+    <a
+      routerLink="/products/add"
+      class="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white shadow-sm transition hover:bg-blue-700"
+    >
+      Add Product
     </a>
 
-</div>
+  </div>
 
-<div class="mt-6 overflow-x-auto rounded-lg bg-white shadow">
 
-    <table class="w-full">
+  <!-- Search -->
+  <div class="mb-6">
 
-        <thead class="bg-slate-200">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      name="search"
+      placeholder="Search Product...."
+      class="w-full max-w-md rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+    >
 
-            <tr>
+  </div>
 
-                <th class="p-4 text-left">Name</th>
-                <th class="p-4 text-left">SKU</th>
-                <th class="p-4 text-left">Category</th>
-                <th class="p-4 text-left">Quantity</th>
-                <th class="p-4 text-left">Rack</th>
-                <th class="p-4 text-left">Description</th>
-                <th class="p-4 text-left">Actions</th>
 
-            </tr>
+  <!-- Product List -->
+  <div class="overflow-hidden rounded-xl bg-white shadow-sm">
 
-        </thead>
+    <!-- Header -->
+    <div
+      class="grid grid-cols-7 gap-4 bg-slate-200 px-5 py-5 text-left text-sm font-semibold text-gray-900"
+    >
 
-        <tbody>
+      <div>
+        Name
+      </div>
 
-            @for (product of filteredProducts; track product._id) {
+      <div>
+        SKU
+      </div>
 
-            <tr class="border-b">
+      <div>
+        Category
+      </div>
 
-                <td class="p-4">{{ product.name }}</td>
+      <div>
+        Quantity
+      </div>
 
-                <td class="p-4">{{ product.sku }}</td>
+      <div>
+        Rack
+      </div>
 
-                <td class="p-4">{{ product.category }}</td>
+      <div>
+        Description
+      </div>
 
-                <td class="p-4">{{ product.quantity }}</td>
+      <div>
+        Actions
+      </div>
 
-                <td class="p-4">{{ product.rackLocation }}</td>
+    </div>
 
-                <td class="p-4">{{ product.description }}</td>
 
-                <td class="space-x-2 p-4">
+    <!-- Product Rows -->
+    <div>
 
-                    <a [routerLink]="['/products/edit', product._id]" class="rounded bg-green-600 px-3 py-2 text-white">
+      @for (product of filteredProducts; track product._id) {
 
-                        Edit
+        <div
+          class="grid grid-cols-7 gap-4 border-b border-gray-200 px-5 py-5 text-sm text-gray-900 transition hover:bg-gray-50"
+        >
 
-                    </a>
+          <!-- Name -->
+          <div class="font-medium">
+            {{ product.name }}
+          </div>
 
-                    <button (click)="deleteProduct(product._id)" class="rounded bg-red-500 px-3 py-2 text-white">
 
-                        Delete
+          <!-- SKU -->
+          <div>
+            {{ product.sku }}
+          </div>
 
-                    </button>
-                </td>
 
-            </tr>
+          <!-- Category -->
+          <div>
+            {{ product.category }}
+          </div>
 
-            }
 
-        </tbody>
+          <!-- Quantity -->
+          <div class="font-medium">
+            {{ product.quantity }}
+          </div>
 
-    </table>
+
+          <!-- Rack -->
+          <div>
+            {{ product.rackLocation }}
+          </div>
+
+
+          <!-- Description -->
+          <div class="truncate">
+            {{ product.description }}
+          </div>
+
+
+          <!-- Actions -->
+          <div class="flex flex-wrap gap-2">
+
+            <!-- Edit -->
+            <a
+              [routerLink]="['/products/edit', product._id]"
+              class="rounded-md bg-green-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-green-700"
+            >
+              Edit
+            </a>
+
+
+            <!-- Delete -->
+            <button
+              type="button"
+              (click)="deleteProduct(product._id)"
+              class="rounded-md bg-red-500 px-3 py-2 text-xs font-medium text-white transition hover:bg-red-600"
+            >
+              Delete
+            </button>
+
+
+            <!-- Update Stock -->
+            <a
+              [routerLink]="['/receive', product._id]"
+              class="rounded-md bg-blue-500 px-9 py-2 text-xs font-medium text-white transition hover:bg-blue-600"
+            >
+              Update
+            </a>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- No Products -->
+    @if (filteredProducts.length === 0) {
+
+      <div class="px-5 py-12 text-center">
+
+        <h2 class="text-lg font-semibold text-gray-900">
+          No Products Found
+        </h2>
+
+        <p class="mt-2 text-sm text-gray-500">
+          No products match your search.
+        </p>
+
+      </div>
+
+    }
+
+  </div>
 
 </div>

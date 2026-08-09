@@ -1,39 +1,54 @@
-<h1 class="mb-8 text-3xl font-bold">Dashboard</h1>
+<h1 class="mb-8 text-3xl font-bold">
+  Dashboard
+</h1>
+
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-<div class="rounded-lg bg-white p-6 shadow">
-        <h2 class="text-lg font-semibold">
-            Total Products
-        </h2>
 
-        <p class="mt-4 text-4xl font-bold">
-            {{ totalProducts }}
-        </p>
-    </div>
-<div class="rounded-lg bg-white p-6 shadow">
-        <h2 class="text-lg font-semibold">
-            Received Products
-        </h2>
-        <p class="mt-4 text-4xl font-bold">
-            {{ receivedProducts }}
-        </p>
-    </div>
-<div class="rounded-lg bg-white p-6 shadow">
-        <h2 class="text-lg font-semibold">
-            Issued Products
-        </h2>
+  <!-- Total Products -->
+  <div class="rounded-lg bg-white p-6 shadow">
+    <h2 class="text-lg font-semibold">
+      Total Products
+    </h2>
 
-        <p class="mt-4 text-4xl font-bold">
-            {{ issuedProducts }}
-        </p>
-    </div>
+    <p class="mt-4 text-4xl font-bold">
+      {{ dashboardData.totalProducts }}
+    </p>
+  </div>
 
-    <div class="rounded-lg bg-white p-6 shadow">
-        <h2 class="text-lg font-semibold">
-            Transactions
-        </h2>
 
-        <p class="mt-4 text-4xl font-bold">
-            {{ transactions }}
-        </p>
-    </div>
+  <!-- Received Products -->
+  <div class="rounded-lg bg-white p-6 shadow">
+    <h2 class="text-lg font-semibold">
+      Received Products
+    </h2>
+
+    <p class="mt-4 text-4xl font-bold">
+      {{ dashboardData.receivedOrders }}
+    </p>
+  </div>
+
+
+  <!-- Issued Products -->
+  <div class="rounded-lg bg-white p-6 shadow">
+    <h2 class="text-lg font-semibold">
+      Issued Products
+    </h2>
+
+    <p class="mt-4 text-4xl font-bold">
+      {{ dashboardData.issuedOrders }}
+    </p>
+  </div>
+
+
+  <!-- Transactions -->
+  <div class="rounded-lg bg-white p-6 shadow">
+    <h2 class="text-lg font-semibold">
+      Transactions
+    </h2>
+
+    <p class="mt-4 text-4xl font-bold">
+      {{ dashboardData.totalOrders }}
+    </p>
+  </div>
+
 </div>

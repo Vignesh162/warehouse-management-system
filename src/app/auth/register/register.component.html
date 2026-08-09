@@ -5,32 +5,58 @@
         </h1>
         <div class="mb-4">
             <label class="mb-2 block">Full Name</label>
-            <input
-                [(ngModel)]="registerData.name"
-                name="name"
-                type="text"
-                class="w-full rounded border p-3">
-            </div>
-            <div class="mb-4">
-                <label class="mb-2 block">Username</label>
-                <input
-                [(ngModel)]="registerData.username"
-                name="username"
-                type="text"
-                class="w-full rounded border p-3">
-            </div>
-            <div class="mb-4">
-                <label class="mb-2 block">Password</label>
-                <input
-                [(ngModel)]="registerData.password"
-                name="password"
-                type="password"
-                class="w-full rounded border p-3">
-            </div>
- 
-        <button
-            (click)="register()"
-            class="w-full rounded bg-blue-700 p-3 text-white">Register</button>
+            <input [(ngModel)]="registerData.name" name="name" type="text" #name="ngModel" required
+                placeholder="Enter Your Full Name" class="w-full rounded border p-3">
+            @if(username.touched){
+            @if (username.errors?.['required']) {
+            <p class="mt-1 text-sm text-red-500">
+                Name is required.
+            </p>
+            }
+            }
+        </div>
+        <div class="mb-4">
+            <label class="mb-2 block">Username</label>
+            <input [(ngModel)]="registerData.username" name="username" required placeholder="Enter Username" type="text"
+                #username="ngModel" class="w-full rounded border p-3">
+            @if(username.touched){
+            @if (username.errors?.['required']) {
+            <p class="mt-1 text-sm text-red-500">
+                Usernname is required.
+            </p>
+            }
+            }
+        </div>
+        <div class="mb-4">
+            <label class="mb-2 block">Password</label>
+            <input [(ngModel)]="registerData.password" name="password" type="password" required minlength="6"
+                maxlength="12" pattern="^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,12}$" #password="ngModel"
+                class="w-full rounded border p-3" placeholder="Enter password">
+
+            @if (password.invalid && password.touched) {
+
+            @if (password.errors?.['required']) {
+            <p class="mt-1 text-sm text-red-500">
+                Password is required.
+            </p>
+            }
+
+            @if (password.errors?.['minlength'] || password.errors?.['maxlength']) {
+            <p class="mt-1 text-sm text-red-500">
+                Password must be between 6 to 12 characters.
+            </p>
+            }
+
+            @if (password.errors?.['pattern']) {
+            <p class="mt-1 text-sm text-red-500">
+                Password must contain at least 1 uppercase letter
+                and 1 special character.
+            </p>
+            }
+            }
+        </div>
+
+        <button (click)="register()" class="w-full rounded bg-blue-700 p-3 text-white">Register</button>
 
     </div>
 </div>

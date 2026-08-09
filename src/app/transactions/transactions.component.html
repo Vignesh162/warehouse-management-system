@@ -14,6 +14,7 @@
                 <th class="p-4 text-left">Product</th>
                 <th class="p-4 text-left">Quantity</th>
                 <th class="p-4 text-left">Date</th>
+                <th class="p-4 text-left">Performed By</th>
                 <th class="p-4 text-left">Remark</th>
             </tr>
 
@@ -46,6 +47,9 @@
                         {{ transaction.transactionDate }}
                     </td>
 
+                    <td class="p-4">
+                        {{ transaction.performedByName }}
+                    </td>
                     <td class="p-4">
                         {{ transaction.remarks }}
                     </td>
