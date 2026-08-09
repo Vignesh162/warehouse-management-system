@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TransactionHistory } from '../interfaces/transation';
@@ -13,7 +13,7 @@ export class TransationService {
   private apiUrl : string = 'https://simple-warehouse-tracker.onrender.com';
 
   constructor(private http : HttpClient) {}
-
+   
   /**
  * Fetches transaction history.
  * @param token Authentication token.
@@ -43,11 +43,12 @@ export class TransationService {
  * @param data Transaction details.
  * @param token Authentication token.
  */
-    postOprationProduct(id : string  , data : TransactionData , token : string) : Observable<any>{
+    postOprationProduct(id : string  , data : TransactionData , token : string) : Observable<TransactionResponse>{
+      
       const headers = new HttpHeaders({
         Authorization : `Bearer ${token}`
       })
-      return this.http.patch<TransactionResponse>(`${this.apiUrl}/api/products/${id}/stock` ,data ,  {headers , observe: 'response'}  )
+      return this.http.patch<TransactionResponse>(`${this.apiUrl}/api/products/${id}/stock` ,data ,  {headers}  )
     }
 
 }

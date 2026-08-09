@@ -55,7 +55,7 @@ export class ProductService {
   * @param {string | null} token Authentication token used to authorize the request.
   * @return {Observable} Observable containing the product creation response.
   */
-  postProduct(data: Product, token: string | null): Observable<any> {
+  postProduct(data: Product, token: string | null): Observable<HttpResponse<postProductResponseData>>{
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -84,7 +84,7 @@ export class ProductService {
    * @param {string | null} token Authentication token used to authorize the request.
    * @return {Observable} Observable containing the product update response.
    */
-  updateProduct(id: string, data: Product, token: string | null): Observable<any> {
+  updateProduct(id: string, data: Product, token: string | null): Observable<HttpResponse<postProductResponseData>> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });

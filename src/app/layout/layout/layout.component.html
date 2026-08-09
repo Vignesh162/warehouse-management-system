@@ -1,14 +1,22 @@
-<app-navbar></app-navbar>
+<div class="h-screen overflow-hidden">
 
-<div class="flex">
 
-    <app-sidebar></app-sidebar>
+  <app-sidebar  class="fixed left-0 top-16 z-50 h-screen w-64" ></app-sidebar>
 
-    <main class="flex-1 min-h-screen p-6 bg-slate-100">
 
+  <!-- Main Section -->
+  <div class="ml-64 h-screen">
+    
+    <app-navbar class="fixed left-0 right-0 top-0 z-40 h-16" ></app-navbar>
+
+
+    <!-- Scrollable Content -->
+    <main class="h-screen overflow-y-auto bg-slate-100 pt-16" >
+      <div class="p-6">
         <router-outlet></router-outlet>
-
+      </div>
     </main>
 
-</div>
+  </div>
 
+</div>

@@ -37,7 +37,7 @@ export interface TransactionData {
 export interface TransactionResponse {
   message: string;
   product: ProductResponse;
-}
+}   
 
 
 export interface postProductResponse {
@@ -57,7 +57,7 @@ export interface postProductResponseData {
   message: string;
   product: ProductResponse;
 }
-
+  
 export interface DeleteProductResponse {
   message: string;
 }

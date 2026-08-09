@@ -139,7 +139,7 @@ export class ProductFormComponent {
 
 
     this.productService.updateProduct(this.productId, this.product, token).subscribe({
-      next: (response: HttpResponse<Product>) => {
+      next: (response: HttpResponse<postProductResponseData>) => {
         console.log(response);
 
         if (response.status === 200) {

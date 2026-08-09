@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [FormsModule],
   templateUrl: './recive.component.html',
   styleUrl: './recive.component.css'
-})
+})  
 export class ReciveComponent {
 
   //  * Stores the ID of the selected product.
@@ -106,6 +106,7 @@ export class ReciveComponent {
         this.router.navigate(['/transactions']);
       },
       error: (error: unknown) => {
+        this.toastr.error('Enter quantity properly');
         console.log(error);
       }
     });

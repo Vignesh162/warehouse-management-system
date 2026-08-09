@@ -1,70 +1,176 @@
 <div class="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow">
 
     <h1 class="mb-6 text-3xl font-bold">
-        Product Form
-    </h1>
+  Product Form
+</h1>
 
-    <div class="mb-4">
-        <label class="mb-2 block">Name</label>
+<form (ngSubmit)="submitButton()" #productForm="ngForm">
 
-        <input
-            [(ngModel)]="product.name"
-            type="text"
-            class="w-full rounded border p-3">
-    </div>
+  <!-- Name -->
+  <div class="mb-4">
+    <label class="mb-2 block">
+      Name <span class="text-red-500">*</span>
+    </label>
 
-    <div class="mb-4">
-        <label class="mb-2 block">SKU</label>
+    <input
+      [(ngModel)]="product.name"
+      name="name"
+      type="text"
+      required
+      #name="ngModel"
+      class="w-full rounded border p-3"
+      [class.border-red-500]="name.invalid && name.touched"
+    >
 
-        <input
-            [(ngModel)]="product.sku"
-            type="text"
-            class="w-full rounded border p-3">
-    </div>
+    @if (name.invalid && name.touched) {
+      <p class="mt-1 text-sm text-red-500">
+        Name is required.
+      </p>
+    }
+  </div>
 
-    <div class="mb-4">
-        <label class="mb-2 block">Category</label>
 
-        <input
-            [(ngModel)]="product.category"
-            type="text"
-            class="w-full rounded border p-3">
-    </div>
+  <!-- SKU -->
+  <div class="mb-4">
+    <label class="mb-2 block">
+      SKU <span class="text-red-500">*</span>
+    </label>
 
-    <div class="mb-4">
-        <label class="mb-2 block">Quantity</label>
+    <input
+      [(ngModel)]="product.sku"
+      name="sku"
+      type="text"
+      required
+      #sku="ngModel"
+      class="w-full rounded border p-3"
+      [class.border-red-500]="sku.invalid && sku.touched"
+    >
 
-        <input
-            [(ngModel)]="product.quantity"
-            type="number"
-            class="w-full rounded border p-3">
-    </div>
+    @if (sku.invalid && sku.touched) {
+      <p class="mt-1 text-sm text-red-500">
+        SKU is required.
+      </p>
+    }
+  </div>
 
-    <div class="mb-4">
-        <label class="mb-2 block">Rack Location</label>
 
-        <input
-            [(ngModel)]="product.rackLocation"
-            type="text"
-            class="w-full rounded border p-3">
-    </div>
+  <!-- Category -->
+  <div class="mb-4">
+    <label class="mb-2 block">
+      Category <span class="text-red-500">*</span>
+    </label>
 
-    <div class="mb-6">
-        <label class="mb-2 block">Description</label>
+    <input
+      [(ngModel)]="product.category"
+      name="category"
+      type="text"
+      required
+      #category="ngModel"
+      class="w-full rounded border p-3"
+      [class.border-red-500]="category.invalid && category.touched"
+    >
 
-        <textarea
-            [(ngModel)]="product.description"
-            rows="4"
-            class="w-full rounded border p-3">
-        </textarea>
-    </div>
+    @if (category.invalid && category.touched) {
+      <p class="mt-1 text-sm text-red-500">
+        Category is required.
+      </p>
+    }
+  </div>
 
-    <button 
-        (click)="submitButton()"
-        class="rounded bg-blue-700 px-5 py-3 text-white">
 
-        Save Product
+  <!-- Quantity -->
+  <div class="mb-4">
+    <label class="mb-2 block">
+      Quantity <span class="text-red-500">*</span>
+    </label>
 
-    </button>
+    <input
+      [(ngModel)]="product.quantity"
+      name="quantity"
+      type="number"
+      required
+      min="1"
+      #quantity="ngModel"
+      class="w-full rounded border p-3"
+      [class.border-red-500]="quantity.invalid && quantity.touched"
+    >
+
+    @if (quantity.invalid && quantity.touched) {
+
+      @if (quantity.errors?.['required']) {
+        <p class="mt-1 text-sm text-red-500">
+          Quantity is required.
+        </p>
+      }
+
+      @if (quantity.errors?.['min']) {
+        <p class="mt-1 text-sm text-red-500">
+          Quantity must be greater than 0.
+        </p>
+      }
+
+    }
+
+  </div>
+
+
+  <!-- Rack Location -->
+  <div class="mb-4">
+    <label class="mb-2 block">
+      Rack Location <span class="text-red-500">*</span>
+    </label>
+
+    <input
+      [(ngModel)]="product.rackLocation"
+      name="rackLocation"
+      type="text"
+      required
+      #rackLocation="ngModel"
+      class="w-full rounded border p-3"
+      [class.border-red-500]="rackLocation.invalid && rackLocation.touched"
+    >
+
+    @if (rackLocation.invalid && rackLocation.touched) {
+      <p class="mt-1 text-sm text-red-500">
+        Rack Location is required.
+      </p>
+    }
+  </div>
+
+
+  <!-- Description -->
+  <div class="mb-6">
+    <label class="mb-2 block">
+      Description <span class="text-red-500">*</span>
+    </label>
+
+    <textarea
+      [(ngModel)]="product.description"
+      name="description"
+      rows="4"
+      required
+      #description="ngModel"
+      class="w-full rounded border p-3"
+      [class.border-red-500]="description.invalid && description.touched"
+    ></textarea>
+
+    @if (description.invalid && description.touched) {
+      <p class="mt-1 text-sm text-red-500">
+        Description is required.
+      </p>
+    }
+  </div>
+
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="rounded bg-blue-700 px-5 py-3 text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+    [disabled]="productForm.invalid"
+  >
+    Save Product
+  </button>
+
+</form>
 
 </div>
