@@ -1,3 +1,6 @@
+// Summary: Helper function to serialize Transaction 
+// It is an helper function used to serailze Transaction fields from MongoDB response converting fields like _id (ObjectID) into string
+// @since 1.0.0
 export default function serializeTransaction(transaction) {
     return {
         _id: transaction._id.toString(),

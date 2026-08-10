@@ -1,6 +1,11 @@
 import { ObjectId } from "mongodb";
 import { serializeProduct } from "../helper/serializeProduct.js";
-// Get All Products
+
+/**
+ * Summary: function to get all products.
+ * Controller which takes limit and page as params (optional) to return products in an paginated format. It returns product detail, total no of products, current page & current limit.
+ * @since 1.0.0
+ **/
 export async function getAllProducts(req, reply) {
     try {
         const limit = Number(req.query.limit) || 10;
@@ -31,8 +36,11 @@ export async function getAllProducts(req, reply) {
         });
     }
 }
-
-// Get Product By ID
+/** 
+ * Summary: function to get product details by id. 
+ * Controller which takes  productId in params & returns product details.
+ * @since 1.0.0 
+ */ 
 export async function getProductById(req, reply) {
 
     try {
@@ -64,8 +72,11 @@ export async function getProductById(req, reply) {
     }
 }
 
-// Add Product
-
+/**
+ * Summary: function to add new product. 
+ * Controller which takes name, sku, category, quantity, rackLocation, description in req body to create new product in the database. Product SKU must be unique. It returns the new product & insertedId in response. 
+ * @since 1.0.0
+ */ 
 export async function addProduct(req, reply) {
 
     try {
@@ -129,8 +140,11 @@ export async function addProduct(req, reply) {
     }
 }
 
-
-// Update Product
+/**
+ * Summary: function to update existing product details.
+ * Description: Controller which takes name, sku, category, quantity, rackLocation, description in req body to update existing product in the database. Product SKU must be unique. It returns the new product & insertedId in response.
+ * @since 1.0.0
+ */
 export async function updateProduct(req, reply) {
 
     try {
@@ -205,7 +219,9 @@ export async function updateProduct(req, reply) {
         });
     }
 }
-
+// Summary: Function to issue or receive product.
+// Controller which takes product id in params & quanity, remark, transacctionType in req body to issue or receive product updating existing product quanity in the database. It also stores transaction details in the database. It returns the updated product.
+// @since 1.0.0
 // issue or receive product 
 export async function issueOrReceiveProduct(req, reply) {
     const id = req.params.id;
@@ -278,8 +294,10 @@ export async function issueOrReceiveProduct(req, reply) {
     }
 }
 
-// Delete Product
-
+/** Summary: Function to delete a product.
+ * Controller which takes product id in params to delete a product.
+ * @since 1.0.0
+ */
 export async function deleteProductById(req, reply) {
 
     try {

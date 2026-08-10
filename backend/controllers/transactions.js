@@ -1,5 +1,8 @@
 import serializeTransaction from "../helper/serializeTransaction.js";
 
+// Summary: function to get all trasaction.
+// Controller which takes limit and page as params (optional) to return transaction in an paginated format.
+// @since 1.0.0
 export async function getAllTransactions(req, reply) {
     try {
         const limit = Number(req.query.limit) || 10;
@@ -9,6 +12,7 @@ export async function getAllTransactions(req, reply) {
 
         const transactions = await collection
             .find({})
+            .sort({transactionDate:-1})
             .skip((page - 1) * limit)
             .limit(limit)
             .toArray();

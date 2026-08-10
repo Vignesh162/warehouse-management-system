@@ -1,5 +1,10 @@
 import bcrypt from "bcrypt";
 
+/**
+ * Summary: Function For User Login.
+ * It is an controller which takes username & password for authentication & returns a JWT Token which is valid for 24 hours. The password is stored in hashed formed using BCRYPT 
+ * @since 1.0.0 
+ * */
 export const login = async (req, reply) => {
     const { username, password } = req.body;
     try {
@@ -36,6 +41,11 @@ export const login = async (req, reply) => {
     }
 };
 
+/**
+ * Summary: Function For User Registration.
+ * It is an controller which takes name, username & password for authentication & returns a JWT Token which is valid for 24 hours. Username should be unique, The password should have minimum length of 6 and maximum length of 12, containing atleast 1 uppercase, 1 lowercase, and 1 speacial character.Paswword is stored in hashed form (using BCRYPT) in the database. 
+ * @since 1.0.0
+ */
 export const createUser = async (req, reply) => {
     const { name, username, password } = req.body;
 
