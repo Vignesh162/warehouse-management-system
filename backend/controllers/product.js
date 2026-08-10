@@ -15,6 +15,7 @@ export async function getAllProducts(req, reply) {
 
         const products = await collection
             .find({})
+            .sort({updatedAt: -1})
             .skip((page - 1) * limit)
             .limit(limit)
             .toArray();
