@@ -143,7 +143,7 @@ export class ProductFormComponent {
         console.log(response);
 
         if (response.status === 200) {
-          this.toastr.success('Product Added Successfully ');
+          this.toastr.success('Product Updated Successfully ');
           this.router.navigate(['/products']);
         }
       },
