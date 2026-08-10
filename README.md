@@ -1,4 +1,3 @@
-````markdown
 # Warehouse Management System
 
 A modern and responsive **Warehouse Management System** built with **Angular 17**, **TypeScript**, **RxJS**, and **Tailwind CSS**, with a RESTful backend powered by **Fastify** and **MongoDB**.
