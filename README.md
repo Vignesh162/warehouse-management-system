@@ -1103,27 +1103,17 @@ This project is created for **educational and development purposes**.
 
 # Authors
 
-**1. Aashish Prajapati**
+### 1. Aashish Prajapati
 
-B.Sc. Information Technology
+**B.Sc. Information Technology**
 
-```
+GitHub: [https://github.com/aashishprajapati99679](https://github.com/aashishprajapati99679)
 
-github url:
+---
 
-```text
-````
-https://github.com/aashishprajapati99679
-````
-**2. Vignesh Pai**
-```
+### 2. Vignesh Pai
 
-github url:
+**B.E. Information Technology**
 
-```text
-````
-https://github.com/Vignesh162
-````
-B.E. Information Technology
-
+GitHub: [https://github.com/Vignesh162](https://github.com/Vignesh162)
 
