@@ -15,7 +15,12 @@ export const GetTransactionsSchema = {
                 maximum: 100,
                 default: 10
             },
-            type: {
+            search: {
+                type: "string",
+                minLength: 1,
+                maxLength: 100,
+            },
+            transactionType: {
                 type: "string",
                 enum: ["RECEIVE", "ISSUE"]
             },
@@ -30,10 +35,14 @@ export const GetTransactionsSchema = {
                 maxLength: 24
             },
             productSKU: {
-                type: "string"
+                type: "string",
+                minLength: 1,
+                maxLength: 100,
             },
             productName: {
-                type: "string"
+                type: "string",
+                minLength: 1,
+                maxLength: 100,
             }
         }
     },
