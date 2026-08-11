@@ -10,11 +10,34 @@ export async function getAllProducts(req, reply) {
     try {
         const limit = Number(req.query.limit) || 10;
         const page = Number(req.query.page) || 1;
+        const search = req.query.search?.trim();
 
         const collection = req.server.mongo.db.collection("products");
 
+        let findQuery = {};
+
+        // Search by product name OR SKU
+        if (search) {
+            findQuery = {
+                $or: [
+                    {
+                        name: {
+                            $regex: search,
+                            $options: "i"
+                        }
+                    },
+                    {
+                        sku: {
+                            $regex: search,
+                            $options: "i"
+                        }
+                    }
+                ]
+            };
+        }
+
         const products = await collection
-            .find({})
+            .find(findQuery)
             .sort({updatedAt: -1})
             .skip((page - 1) * limit)
             .limit(limit)

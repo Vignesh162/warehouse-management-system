@@ -11,7 +11,12 @@ export const GetAllProductsSchema = {
             limit: {
                 type: "number",
                 minimum: 1
-            }
+            },
+            search: {
+                type: "string",
+                minLength: 1,
+                maxLength: 100,
+            },
         }
     },
 
