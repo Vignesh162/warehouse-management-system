@@ -43,7 +43,7 @@ export async function getAllProducts(req, reply) {
             .limit(limit)
             .toArray();
 
-        const total = await collection.countDocuments();
+        const total = await collection.countDocuments(findQuery);
         console.log(products);
         return reply.code(200).send({
             total,
@@ -82,8 +82,7 @@ export async function getProductById(req, reply) {
                 message: "Product not found"
             });
         }
-        console.log(product);
-        console.log(serializeProduct(product));
+
         return reply.code(200).send(serializeProduct(product));
 
     } catch (err) {
